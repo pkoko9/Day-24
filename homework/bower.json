@@ -1,0 +1,20 @@
+{
+  "name": "todolist",
+  "version": "0.0.0",
+  "authors": [
+    "Paul Kokoszyna <pkoko9@hotmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.3"
+  }
+}
