@@ -6,16 +6,9 @@ var PostFormView = Backbone.View.extend({
         post: function () {
             this.model.save({message: this.$el.find("#description"),
                 
-                }
-            });
-        }
-    });
-}
-
-
-
-
-
+            }
+        });        
+});
 
 
 // 	template: _.template($('#post-form-template').html()),
