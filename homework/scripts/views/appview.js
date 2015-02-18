@@ -1,65 +1,86 @@
  var AppView = Backbone.View.extend({
- 	el: '#app-view',
-	initialize: function(){
+
+	el: '#app-view',
+	initialize: function() {
 
 		_.bindAll(
 			this,
-			'onAddButtonClick'
-			// 'onCheckBoxClick'
+			'onButtonClick',
+			'onAddToCollection'
 		);
 
-		this.$descriptionBox = $('#description');
-		this.$addButton = $('#add-button');
-		this.$addButton.on('click',this.onAddButtonClick);
+
+		this.$textInput = $('#text-input');
+		this.$todoList = $('#todo-list');
+		var $button = $('#my-button');
+		this.messagesCollection = new messagesCollection();
+
+		$button.on('click', this.onButtonClick);
+		this.messagesCollection.on('add', this.onAddToCollection);
+
+		this.messagesCollection.fetch();
+
 	},
-	onAddButtonClick: function() {
+
+	render: function() {
+
+	},
+
+	onButtonClick: function() {
+
+		this.listItem = new messageModel();
+		console.log(this.listItem);
+
+		this.listItem.set({ 
+
+			message: this.$textInput.val()
+
+
+		});
+
+		this.listItem.save();
+
+		this.messagesCollection.add(this.listItem);
+		this.$textInput.val('');
+	},
+
+	onAddToCollection: function(listItem) {
+		var newListView = new listView({model: listItem});
+		console.log(newListView);
+		console.log(this);
+		this.$todoList.append(newListView.$el);
 		
-		$.post(
-			'http://tiny-pizza-server.herokuapp.com/collections/pkokotodo',
-			{
-				message: $('#description').val(),
-			},
-			function(message) {
-				console.log(message)
-			},
-			'json'
-		);
+	}
 
-		$('#list').append("<br>" + this.$descriptionBox.val());
-		$('<input type="checkbox" value=1 id="myCheckbox"/>').appendTo('#list');
-
-	},
-	
-	onCheckBoxClick: function() {
-		$('#myCheckbox').prop('checked', true);
-		$('#myCheckbox').prop('checked', false); 	
-		if ('#myCheckbox' == true) {
-			$('#list').css('textDecoration','line-through');
-		}
-
-    }
 });
 
 
-// $('#post').on('click', onPostButtonClick);
-
-// 	function onPostButtonClick() {
+//initial code
+// 	onAddButtonClick: function() {
 		
-// 		console.log($('#message').val());
-// 		var response = $('#message').val();
-	
-
-// 	$.post(
-// 			'http://tiny-pizza-server.herokuapp.com/collections/austinfe',
+// 		$.post(
+// 			'http://tiny-pizza-server.herokuapp.com/collections/pkokotodo',
 // 			{
-// 				message: response,
-// 				name: 'Paul'
+// 				message: $('#description').val(),
 // 			},
 // 			function(message) {
 // 				console.log(message)
-// 			// render(messages);
 // 			},
 // 			'json'
 // 		);
-// 	}
+
+// 		$('#list').append("<br>" + this.$descriptionBox.val());
+// 		$('<input type="checkbox" value=1 id="myCheckbox"/>').appendTo('#list');
+
+// 	},
+	
+// 	onCheckBoxClick: function() {
+// 		$('#myCheckbox').prop('checked', true);
+// 		$('#myCheckbox').prop('checked', false); 	
+// 		if ('#myCheckbox' == true) {
+// 			$('#list').css('textDecoration','line-through');
+// 		}
+
+//     }
+// });
 

@@ -1,3 +1,4 @@
 $(document).ready(function() {
-	var myNewAppView = new AppView();
-})
+	var myAppView = new AppView();
+	
+});

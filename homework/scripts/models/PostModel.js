@@ -1,14 +1,7 @@
-var PostModel = Backbone.Model.extend({
-	urlRoot: 'http://tiny-pizza-server.herokuapp.com/collections/aaron-blog-post',
+var messageModel = Backbone.Model.extend({
+	urlRoot: 'http://tiny-pizza-server.herokuapp.com/collections/paulk',
 	defaults: {
-		message: '',
-		// title: '',
-		// body: '',
-		// pinned: false
+		message: null,
 	},
-	// idAttribute: '_id',
-	// validate: function(attrs, options) {
-	// 	if(!attrs.title) return 'Please enter a <b>title</b>.';
-	// 	if(!attrs.body) return 'Please enter a <b>body</b>.';
-	// }
 });
+
